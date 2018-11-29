@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" type="text/css" href="../css/industrious.css">
+<link rel="stylesheet" type="text/css" href="../css/extra.css">
+<script src="../js/jquery-3.3.1.min.js"></script>
+<script src="../js/organizer.js"></script>
+<style>
+	
+</style>
+<head>
+	<title>Scheduler - Organizer's Page</title>
+</head>
+<body class="is-menu-visible"> 
+	<div>
+		<nav id="menu">
+			<div>
+				<h3>Extend schedule:</h3>
+				from:
+				<input type="date" style="color: black;"> <br/>
+				to:
+				<input type="date" style="color: black;">
+				<input type="submit" style="width: 200px; margin: 40px" value="Confirm">
+			</div>
+			<div>	
+				<h3>Retrieve meeting schedule by code:</h3>
+				<input style="width: 300px; color: black; background-color: white"type="text" id="secretcode" name="secretcode">
+				<input type="submit" style="width: 200px; margin: 40px" value="Confirm">
+			</div>
+			<div id="create-schedule">
+				<h3>Or, create one </h3>
+				<form name="createForm" method="POST">
+					schedule name:<input name="name" value="Schedule name" />
+					author:<input name="author" value="Author" />
+					start date:<input name="startDate" type="date"/>
+					end date:<input name="endDate" type="date"/>
+					daily start time:<input name="startTime" type="time"/>
+					daily end time:<input name="endTime" type="time"/>
+					timeslot period:
+					<select name="duration">
+						<option value="15">15 minutes</option>
+						<option value="20">20 minutes</option>
+						<option value="30">30 minutes</option>
+						<option value="60">60 minutes</option>
+					</select>
+					<input type="button" value="Create"  onClick="handleCreate(this)">
+				</form>
+			</div>
+			
+		</nav>
+	</div>
+	<div id="main" class="left">	
+		<h1>Scheduler - Organizer's Page</h1>
+		<h3 id="schedule-info">Schedule name: CS3733 | Author: Prof. Heineman </h3>
+		<p id="schedule-code">Secret code: 3854134-2423fad-aa14513852 | Release code: 3854134-2423fad-aa14513852 </p>
+		<div style="text-align: right;">
+			<a class="button small" href="#">previous week</a>
+			<a class="button small" href="#">next week</a>
+			week:<input type="number" style="width: 50px; text-align: center" min="1">
+			<a class="button small" href="#">jump</a>
+		</div>
+		<table id="schedule" border="1" cellpadding="5" style="margin: 50px; width: 1400px;"> 
+			<caption> Scheduler </caption>
+			<thead>
+				<th>Time</th>
+				<th>Sun<br/>18-Nov<br/>
+					<a href="#">close all</a><br/>
+					<a href="#">open all</a>
+				</th>
+				<th>Mon<br/>19-Nov<br/>
+					<a href="#">close all</a><br/>
+					<a href="#">open all</a>
+				</th>
+				<th>Tue<br/>20-Nov<br/>
+					<a href="#">close all</a><br/>
+					<a href="#">open all</a>
+				</th>
+				<th>Wed<br/>21-Nov<br/>
+					<a href="#">close all</a><br/>
+					<a href="#">open all</a>
+				</th>
+				<th>Thu<br/>22-Nov<br/>
+					<a href="#">close all</a><br/>
+					<a href="#">open all</a>
+				</th>
+				<th>Fri<br/>23-Nov<br/>
+					<a href="#">close all</a><br/>
+					<a href="#">open all</a>
+				</th>
+				<th>Sat<br/>24-Nov<br/>
+					<a href="#">close all</a><br/>
+					<a href="#">open all</a>
+				</th>
+			</thead>
+			
+			<tbody>
+				<tr>
+					<td>9:00-9:15
+						<a href="#">close all</a>
+						<a href="#">open all</a>
+					</td>
+					<td>N/A<br/><a href="#">open</a></td>
+					<td>N/A<br/><a href="#">open</a></td>
+					<td><input type="submit" value="Free"></td>
+					<td>Rui Huang<br/><a href="#">cancel</a></td>
+					<td>Zhanhong Huang<br/><a href="#">cancel</a></td>
+					<td><input type="submit" value="Free"></td>
+					<td>N/A<br/><a href="#">open</a></td>
+				</tr>
+				<tr>
+					<td>9:15-9:30
+						<a href="#">close all</a>
+						<a href="#">open all</a>
+					</td>
+					<td>N/A<br/><a href="#">open</a></td>
+					<td>N/A<br/><a href="#">open</a></td>
+					<td><input type="submit" value="Free"></td>
+					<td><input type="submit" value="Free"></td>
+					<td>Ziqian Zeng<br/><a href="#">cancel</a></td>
+					<td><input type="submit" value="Free"></td>
+					<td>N/A<br/><a href="#">open</a></td>
+				</tr>
+				<tr>
+					<td>9:30-9:45
+						<a href="#">close all</a>
+						<a href="#">open all</a>
+					</td>
+					<td>N/A<br/><a href="#">open</a></td>
+					<td>N/A<br/><a href="#">open</a></td>
+					<td><input type="submit" value="Free"></td>
+					<td><input type="submit" value="Free"></td>
+					<td><input type="submit" value="Free"></td>
+					<td><input type="submit" value="Free"></td>
+					<td>N/A<br/><a href="#">open</a></td>
+				</tr>
+				<tr>
+					<td>9:45-10:00
+						<a href="#">close all</a>
+						<a href="#">open all</a>
+					</td>
+					<td>N/A<br/><a href="#">open</a></td>
+					<td>N/A<br/><a href="#">open</a></td>
+					<td><input type="submit" value="Free"></td>
+					<td>Zonglin Peng<br/><a href="#">cancel</a></td>
+					<td><input type="submit" value="Free"></td>
+					<td><input type="submit" value="Free"></td>
+					<td>N/A<br/><a href="#">open</a></td>
+				</tr>
+				<tr>
+					<td>10:00-10:15
+						<a href="#">close all</a>
+						<a href="#">open all</a>
+					</td>
+					<td>N/A<br/><a href="#">open</a></td>
+					<td>N/A<br/><a href="#">open</a></td>
+					<td><input type="submit" value="Free"></td>
+					<td><input type="submit" value="Free"></td>
+					<td><input type="submit" value="Free"></td>
+					<td><input type="submit" value="Free"></td>
+					<td>N/A<br/><a href="#">open</a></td>
+				</tr>
+				<tr>
+					<td>10:15-10:30
+						<a href="#">close all</a>
+						<a href="#">open all</a>
+					</td>
+					<td>N/A<br/><a href="#">open</a></td>
+					<td>N/A<br/><a href="#">open</a></td>
+					<td><input type="submit" value="Free"></td>
+					<td><input type="submit" value="Free"></td>
+					<td><input type="submit" value="Free"></td>
+					<td><input type="submit" value="Free"></td>
+					<td>N/A<br/><a href="#">open</a></td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>

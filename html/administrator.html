@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" type="text/css" href="../css/industrious.css">
+<link rel="stylesheet" type="text/css" href="../css/extra.css">
+<style>
+	
+</style>
+<head>
+	<title>Scheduler - Administrator's Page</title>
+</head>
+<body class="is-menu-visible"> 
+	<div>
+		<nav id="menu">
+			<p>	
+				<h3>Authenticate by code:</h3>
+				<input style="width: 300px; color: black; background-color: white" type="text" value="[Secret code here]">
+				<input type="submit" style="width: 200px; margin: 50px; margin-top: 20px;" value="Confirm">
+				<h5>Delete schedules created before:</h5>
+				<input style="width: 300px; color: black; background-color: white" type="text" value="Days">
+				<input type="submit" style="width: 200px; margin: 50px; margin-top: 20px;" value="Confirm">
+                <h5>Retrieve schedules created within:</h5>  
+				<input style="width: 300px; color: black; background-color: white" type="text" value="Hours">
+				<input type="submit" style="width: 200px; margin: 50px; margin-top: 20px;" value="Confirm">
+			</p>
+		</nav>
+	</div>
+	<div id="main" class="left">	
+		<h1>Scheduler - Administrator's Page</h1>
+		<!-- <div style="text-align: right;">
+			<a class="button small" href="#">previous</a>
+			<a class="button small" href="#">next</a>
+			<input type="number">
+			<a class="button small" href="#">jump</a>
+		</div> -->
+		<table border="1" cellpadding="5" style="margin: 50px; width: 1400px;"> 
+			<caption> List of Schedules </caption>
+			<thead>
+				<th>Schedule Name</th>
+                <th>Date Created</th>
+                <th>Available Time</th>
+				<th>Total Meetings</th>
+				<th>Future Meetings</th>
+			</thead>
+			
+			<tbody>
+				<tr>
+					<th>CS3733 office hour</th>
+					<td>2018/11/01</td>
+					<td>2018/11/02-2018/11/30</td>
+					<td>74</td>
+					<td>48</td>
+				</tr>
+				<tr>
+					<th>CS2303 office hour</th>
+					<td>2018/11/01</td>
+					<td>2018/11/02-2018/11/30</td>
+					<td>74</td>
+					<td>48</td>
+				</tr>
+				<tr>
+					<th>CS210X office hour</th>
+					<td>2018/11/01</td>
+					<td>2018/11/02-2018/11/30</td>
+					<td>74</td>
+					<td>48</td>
+				</tr>
+				<tr>
+					<th>CS2223 office hour</th>
+					<td>2018/11/01</td>
+					<td>2018/11/02-2018/11/30</td>
+					<td>74</td>
+					<td>48</td>
+				</tr>
+			</table>
+		</div>
+		<div>
+		</div>
+	</body>
+	</html>

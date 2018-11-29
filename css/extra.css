@@ -1,0 +1,19 @@
+div.left {
+    margin-right: 500px;
+}
+div.middle{
+    margin-left: 100px;
+    width: 500px;
+}
+nav#menu select {
+    height: 40px; 
+    color: black; 
+    background-color: white;
+}
+nav#menu form input{
+    color: black;
+    width: 250px;
+}
+nav#menu form input[type="button"]{
+    margin-top: 20px;
+}

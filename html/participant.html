@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" type="text/css" href="../css/industrious.css">
+<link rel="stylesheet" type="text/css" href="../css/extra.css">
+<script src="../js/participant.js"></script>
+<head>
+	<title>Scheduler - Participant's Page</title>
+</head>
+<body class="is-menu-visible"> 
+	<div>
+		<nav id="menu">
+			<p>	
+				<h3>Retrieve meeting schedule by code:</h3>
+				<input style="width: 300px; color: black; background-color: white"type="text" id="secretcode" name="secretcode">
+				<input type="submit" style="width: 200px; margin: 40px" value="Confirm">
+			</p>
+			<h4>Search timesolots by:</h4>
+			<p>	
+				Years:
+				<select class="small" id="organizor" name="organizor">
+					<option>from</option>
+				</select>
+				<select class="small" id="organizor" name="organizor">
+					<option>to</option>
+				</select>
+				Months:
+				<select class="small" id="organizor" name="organizor">
+					<option>from</option>
+				</select>
+				<select class="small" id="organizor" name="organizor">
+					<option>to</option>
+				</select>
+				Day-of-week:
+				<select id="organizor" name="organizor">
+				</select>
+				Day-of-month:
+				<select id="organizor" name="organizor">
+				</select>
+				Time slot:
+				<select id="organizor" name="organizor">
+				</select>
+			</p>
+			<input type="submit" style="width: 200px; margin-left: 40px" value="Confirm">
+		</nav>
+	</div> 
+
+	<div id="main" class="left">	
+		<h1>Scheduler - Participant's Page</h1>
+		<h3>Schedule name: [NAME]</h3>
+		<div style="text-align: right;">
+			<a class="button small" href="#">previous week</a>
+			<a class="button small" href="#">next week</a>
+			week:<input type="number" style="width: 50px; text-align: center" min="1">
+			<a class="button small" href="#">jump</a>
+		</div>
+		<table border="1" cellpadding="5" style="margin: 50px; width: 1400px;"> 
+			<caption> Scheduler </caption>
+			<thead>
+				<th>Time</th>
+				<th>Mon<br/>19-Nov</th>
+				<th>Tue<br/>20-Nov</th>
+				<th>Wed<br/>21-Nov</th>
+				<th>Thu<br/>22-Nov</th>
+				<th>Fri<br/>23-Nov</th>
+			</thead>
+			
+			<tbody>
+				<tr>
+					<th>9:00-9:15</th>
+					<td>N/A</td>
+					<td><input type="submit" value="Free"></td>
+					<td>Rui Huang<br/><a href="" onclick="handleCancel()">cancel</a></td>
+					<td>Zhanhong Huang<br/><a href="" onclick="handleCancel()">cancel</a></td>
+					<td><input type="submit" value="Free"></td>
+				</tr>
+				<tr>
+					<th>9:15-9:30</th>
+					<td>N/A</td>
+					<td><input type="submit" value="Free"></td>
+					<td><input type="submit" value="Free"></td>
+					<td>Ziqian Zeng<br/><a href="" onclick="handleCancel()">cancel</a></td>
+					<td><input type="submit" value="Free"></td>
+				</tr>
+				<tr>
+					<th>9:30-9:45</th>
+					<td>N/A</td>
+					<td><input type="submit" value="Free"></td>
+					<td><input type="submit" value="Free"></td>
+					<td><input type="submit" value="Free"></td>
+					<td><input type="submit" value="Free"></td>
+				</tr>
+				<tr>
+					<th>9:45-10:00</th>
+					<td>N/A</td>
+					<td><input type="submit" value="Free"></td>
+					<td>Zonglin Peng<br/><a href="" onclick="handleCancel()">cancel</a></td>
+					<td><input type="submit" value="Free"></td>
+					<td><input type="submit" value="Free"></td>
+				</tr>
+				<tr>
+					<th>10:00-10:15</th>
+					<td>N/A</td>
+					<td><input type="submit" value="Free"></td>
+					<td><input type="submit" value="Free"></td>
+					<td><input type="submit" value="Free"></td>
+					<td><input type="submit" value="Free"></td>
+				</tr>
+				<tr>
+					<th>10:15-10:30</th>
+					<td>N/A</td>
+					<td><input type="submit" value="Free"></td>
+					<td><input type="submit" value="Free"></td>
+					<td><input type="submit" value="Free"></td>
+					<td><input type="submit" value="Free"></td>
+				</tr>
+			</table>
+		</div>
+		<div class="middle">
+			<h2>Searching Result:</h2>
+			<ul>
+				<li>
+					Nov. 26 | 10:15-10:30
+					<a href="">register</a>
+				</li>
+				<li>
+					Nov. 27 | 10:15-10:30
+					<a href="">register</a>
+				</li>
+				<li>
+					Nov. 28 | 10:15-10:30
+					<a href="">register</a>
+				</li>
+			</ul>
+		</div>
+	</body>
+	</html>
