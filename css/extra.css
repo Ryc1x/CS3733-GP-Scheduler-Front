@@ -17,3 +17,12 @@ nav#menu form input{
 nav#menu form input[type="button"]{
     margin-top: 20px;
 }
+
+table#schedule {
+    margin: 30px; 
+    width: 1400px;
+}
+
+body {
+    margin-left: 30px;
+}

@@ -10,7 +10,7 @@
 <head>
 	<title>Scheduler - Organizer's Page</title>
 </head>
-<body class="is-menu-visible"> 
+<body class="is-menu-visible" onload="handleRefresh(1)"> 
 	<div>
 		<nav id="menu">
 			<div>
@@ -51,125 +51,17 @@
 	<div id="main" class="left">	
 		<h1>Scheduler - Organizer's Page</h1>
 		<h3 id="schedule-info">Schedule name: CS3733 | Author: Prof. Heineman </h3>
-		<p id="schedule-code">Secret code: 3854134-2423fad-aa14513852 | Release code: 3854134-2423fad-aa14513852 </p>
+		<p id="schedule-code">Secret code: [Secret code] | Release code: [Release code] </p>
 		<div style="text-align: right;">
-			<a class="button small" href="#">previous week</a>
-			<a class="button small" href="#">next week</a>
-			week:<input type="number" style="width: 50px; text-align: center" min="1">
-			<a class="button small" href="#">jump</a>
+			<a class="button small" onclick="prev()">previous week</a>
+			<a class="button small" onclick="next()">next week</a>
+			week:<input id="week-input" type="number" style="width: 50px; text-align: center" min="1">
+			<a class="button small" onclick="jump()">jump</a>
 		</div>
-		<table id="schedule" border="1" cellpadding="5" style="margin: 50px; width: 1400px;"> 
-			<caption> Scheduler </caption>
-			<thead>
-				<th>Time</th>
-				<th>Sun<br/>18-Nov<br/>
-					<a href="#">close all</a><br/>
-					<a href="#">open all</a>
-				</th>
-				<th>Mon<br/>19-Nov<br/>
-					<a href="#">close all</a><br/>
-					<a href="#">open all</a>
-				</th>
-				<th>Tue<br/>20-Nov<br/>
-					<a href="#">close all</a><br/>
-					<a href="#">open all</a>
-				</th>
-				<th>Wed<br/>21-Nov<br/>
-					<a href="#">close all</a><br/>
-					<a href="#">open all</a>
-				</th>
-				<th>Thu<br/>22-Nov<br/>
-					<a href="#">close all</a><br/>
-					<a href="#">open all</a>
-				</th>
-				<th>Fri<br/>23-Nov<br/>
-					<a href="#">close all</a><br/>
-					<a href="#">open all</a>
-				</th>
-				<th>Sat<br/>24-Nov<br/>
-					<a href="#">close all</a><br/>
-					<a href="#">open all</a>
-				</th>
-			</thead>
-			
-			<tbody>
+			<table id="schedule" border="1" cellpadding="5"> 
 				<tr>
-					<td>9:00-9:15
-						<a href="#">close all</a>
-						<a href="#">open all</a>
-					</td>
-					<td>N/A<br/><a href="#">open</a></td>
-					<td>N/A<br/><a href="#">open</a></td>
-					<td><input type="submit" value="Free"></td>
-					<td>Rui Huang<br/><a href="#">cancel</a></td>
-					<td>Zhanhong Huang<br/><a href="#">cancel</a></td>
-					<td><input type="submit" value="Free"></td>
-					<td>N/A<br/><a href="#">open</a></td>
-				</tr>
-				<tr>
-					<td>9:15-9:30
-						<a href="#">close all</a>
-						<a href="#">open all</a>
-					</td>
-					<td>N/A<br/><a href="#">open</a></td>
-					<td>N/A<br/><a href="#">open</a></td>
-					<td><input type="submit" value="Free"></td>
-					<td><input type="submit" value="Free"></td>
-					<td>Ziqian Zeng<br/><a href="#">cancel</a></td>
-					<td><input type="submit" value="Free"></td>
-					<td>N/A<br/><a href="#">open</a></td>
-				</tr>
-				<tr>
-					<td>9:30-9:45
-						<a href="#">close all</a>
-						<a href="#">open all</a>
-					</td>
-					<td>N/A<br/><a href="#">open</a></td>
-					<td>N/A<br/><a href="#">open</a></td>
-					<td><input type="submit" value="Free"></td>
-					<td><input type="submit" value="Free"></td>
-					<td><input type="submit" value="Free"></td>
-					<td><input type="submit" value="Free"></td>
-					<td>N/A<br/><a href="#">open</a></td>
-				</tr>
-				<tr>
-					<td>9:45-10:00
-						<a href="#">close all</a>
-						<a href="#">open all</a>
-					</td>
-					<td>N/A<br/><a href="#">open</a></td>
-					<td>N/A<br/><a href="#">open</a></td>
-					<td><input type="submit" value="Free"></td>
-					<td>Zonglin Peng<br/><a href="#">cancel</a></td>
-					<td><input type="submit" value="Free"></td>
-					<td><input type="submit" value="Free"></td>
-					<td>N/A<br/><a href="#">open</a></td>
-				</tr>
-				<tr>
-					<td>10:00-10:15
-						<a href="#">close all</a>
-						<a href="#">open all</a>
-					</td>
-					<td>N/A<br/><a href="#">open</a></td>
-					<td>N/A<br/><a href="#">open</a></td>
-					<td><input type="submit" value="Free"></td>
-					<td><input type="submit" value="Free"></td>
-					<td><input type="submit" value="Free"></td>
-					<td><input type="submit" value="Free"></td>
-					<td>N/A<br/><a href="#">open</a></td>
-				</tr>
-				<tr>
-					<td>10:15-10:30
-						<a href="#">close all</a>
-						<a href="#">open all</a>
-					</td>
-					<td>N/A<br/><a href="#">open</a></td>
-					<td>N/A<br/><a href="#">open</a></td>
-					<td><input type="submit" value="Free"></td>
-					<td><input type="submit" value="Free"></td>
-					<td><input type="submit" value="Free"></td>
-					<td><input type="submit" value="Free"></td>
-					<td>N/A<br/><a href="#">open</a></td>
+					<th><h2>Welcome! </h2></th>
+					<td><p>Please create a new schedule or retrieve a schedule on the right side </p></td>
 				</tr>
 			</table>
 		</div>

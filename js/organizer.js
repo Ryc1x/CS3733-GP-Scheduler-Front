@@ -9,7 +9,6 @@
 // API URLs
 const createScheduleURL = "https://vie39y0l01.execute-api.us-east-2.amazonaws.com/Version1/schedule";
 const viewScheduleURL = "https://vie39y0l01.execute-api.us-east-2.amazonaws.com/Version1/showWeekSchedule";
-const pageURL = window.location.href.split("?")[0];
 // HTML Elements
 const CLOSE_OPEN_DAY = "<a href=\"#\">close all</a><br/> <a href=\"#\">open all</a>";
 const CLOSE_OPEN_SLOT = "<br /><a href=\"#\">close all</a> <a href=\"#\">open all</a>"
@@ -19,14 +18,6 @@ const OCCUPIED_SLOT = "[participant name]<br/><a href=\"#\">cancel</a>";
 
 // todo delete test vars
 let x;
-
-function clickme() {
-  console.log("test");
-}
-
-function initalize() {
-  window.sessionStorage.set("url",window.location.href);
-}
 
 function handleCreate(e){
   let data = {};
@@ -60,13 +51,12 @@ function handleCreate(e){
   };
 }
 
-function handleRefresh() {
+function handleRefresh(week) {
   let data = {};
   data.id = window.sessionStorage.getItem("id");
-  data.week = window.sessionStorage.getItem("week");
+  data.week = week;
 
-  if (window.sessionStorage.getItem("week") < 1){
-    alert("Already the first week of the schedule");
+  if (data.id == undefined){
     return;
   }
 
@@ -82,7 +72,7 @@ function handleRefresh() {
     console.log(xhr.request);
     if (xhr.readyState == XMLHttpRequest.DONE) {
       console.log ("XHR:" + xhr.responseText);
-      processRefreshResponse(xhr.responseText);
+      processRefreshResponse(xhr.responseText,week);
     } else {
       // todo
     }
@@ -108,16 +98,23 @@ function processCreateResponse(response){
   
   alert("Successfully created the schedule. \nSecret code: " + secretCode + "\nRelease code: " + releaseCode);
   
-  handleRefresh();
+  handleRefresh(1);
 }
 
-function processRefreshResponse(response){
+function processRefreshResponse(response,week){
   // console.log("response:" + response);
   let jsonData = JSON.parse(response);
+  
+  // if invalid week number
   let schedule = jsonData.schedule;
+  if (schedule == undefined){
+    alert("invalid week given");
+    return;
+  }
+
   x = schedule;
   let table = document.getElementById("schedule");
-  
+
   let name = schedule.name;
   let author = schedule.author;
   let releaseCode = schedule.releaseCode;
@@ -134,7 +131,8 @@ function processRefreshResponse(response){
   table.innerHTML = "";
 
   // add caption
-  caption.innerHTML = "week " + sessionStorage.getItem("week");
+  window.sessionStorage.setItem("week", week);
+  caption.innerHTML = "<b>week " + sessionStorage.getItem("week") + "</b>";
   table.appendChild(caption);
 
   // add table head
@@ -148,8 +146,8 @@ function processRefreshResponse(response){
   table.appendChild(thead);
   
   // add name, secret code, and release code
-  document.querySelector("#schedule-info").innerHTML = "Schedule name: " + name + " | Author: " + author;
-  document.querySelector("#schedule-code").innerHTML = "Secret code: " + window.sessionStorage.getItem("scode") + " | Release code: " + releaseCode;
+  document.querySelector("#schedule-info").innerHTML = "Schedule name: <b>" + name + "</b> | Author: <b>" + author + "</b>";
+  document.querySelector("#schedule-code").innerHTML = "Secret code: <b>" + window.sessionStorage.getItem("scode") + "</b> | Release code: <b>" + releaseCode + "</b>";
 
   // add table contents
   let startMinute = toMinute(startTime);
@@ -174,34 +172,20 @@ function processRefreshResponse(response){
   
   // end of display the table
 
-  alert("shedule view updated");
+  alert("Successfully retrieved weekly schedule!");
+}
 
+// previous, next, and jump
+function prev() {
+  handleRefresh( (+window.sessionStorage.week) - 1 );
+}
 
-  
-  // var tbl = document.createElement('table');
-  // tbl.style.width = '100%';
-  // tbl.setAttribute('border', '1');
-  // var tbdy = document.createElement('tbody');
-  // for (var i = 0; i < 3; i++) {
-  //   var tr = document.createElement('tr');
-  //   for (var j = 0; j < 2; j++) {
-  //     if (i == 2 && j == 1) {
-  //       break
-  //     } else {
-  //       var td = document.createElement('td');
-  //       td.appendChild(document.createTextNode('\u0020'))
-  //       i == 1 && j == 1 ? td.setAttribute('rowSpan', '2') : null;
-  //       tr.appendChild(td)
-  //     }
-  //   }
-  //   tbdy.appendChild(tr);
-  // }
-  // tbl.appendChild(tbdy);
-  // body.appendChild(tbl)
-  
-  
-  
-  
+function next() {
+  handleRefresh( (+window.sessionStorage.week) + 1 );
+}
+
+function jump() {
+  handleRefresh(document.getElementById("week-input").value);
 }
 
 // helper methods
