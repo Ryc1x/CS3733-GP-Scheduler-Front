@@ -1,5 +1,6 @@
 div.left {
-    margin-right: 500px;
+    margin-left: 350px;
+    margin-right: 50px;
 }
 div.middle{
     margin-left: 100px;
@@ -12,15 +13,16 @@ nav#menu select {
 }
 nav#menu form input{
     color: black;
+    background-color: white;
     width: 250px;
 }
+
 nav#menu form input[type="button"]{
     margin-top: 20px;
 }
 
 table#schedule {
-    margin: 30px; 
-    width: 1400px;
+    margin: 20px; 
 }
 
 body {

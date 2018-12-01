@@ -23,8 +23,10 @@
 			</div>
 			<div>	
 				<h3>Retrieve meeting schedule by code:</h3>
-				<input style="width: 300px; color: black; background-color: white"type="text" id="secretcode" name="secretcode">
-				<input type="submit" style="width: 200px; margin: 40px" value="Confirm">
+				<form name="retrieveForm" method="POST">
+					<input type="text" id="secretcode" name="secretcode">
+					<input type="button" onclick="alert(123)" value="Confirm">
+				</form>
 			</div>
 			<div id="create-schedule">
 				<h3>Or, create one </h3>
@@ -36,7 +38,7 @@
 					daily start time:<input name="startTime" type="time"/>
 					daily end time:<input name="endTime" type="time"/>
 					timeslot period:
-					<select name="duration">
+					<select name="duration" style="width: 250px;">
 						<option value="15">15 minutes</option>
 						<option value="20">20 minutes</option>
 						<option value="30">30 minutes</option>

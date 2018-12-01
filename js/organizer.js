@@ -56,7 +56,7 @@ function handleRefresh(week) {
   data.id = window.sessionStorage.getItem("id");
   data.week = week;
 
-  if (data.id == undefined){
+  if (data.id == undefined || data.id == "undefined"){
     return;
   }
 
