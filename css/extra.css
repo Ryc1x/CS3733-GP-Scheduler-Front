@@ -2,16 +2,13 @@ div.left {
     margin-left: 350px;
     margin-right: 50px;
 }
-div.middle{
-    margin-left: 100px;
-    width: 500px;
-}
+
 nav#menu select {
     height: 40px; 
     color: black; 
     background-color: white;
 }
-nav#menu form input{
+nav#menu input{
     color: black;
     background-color: white;
     width: 250px;

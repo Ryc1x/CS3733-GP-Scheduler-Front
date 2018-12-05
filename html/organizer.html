@@ -4,28 +4,18 @@
 <link rel="stylesheet" type="text/css" href="../css/extra.css">
 <script src="../js/jquery-3.3.1.min.js"></script>
 <script src="../js/organizer.js"></script>
-<style>
-	
-</style>
+
 <head>
 	<title>Scheduler - Organizer's Page</title>
 </head>
 <body class="is-menu-visible" onload="handleRefresh(1)"> 
 	<div>
 		<nav id="menu">
-			<div>
-				<h3>Extend schedule:</h3>
-				from:
-				<input type="date" style="color: black;"> <br/>
-				to:
-				<input type="date" style="color: black;">
-				<input type="submit" style="width: 200px; margin: 40px" value="Confirm">
-			</div>
 			<div>	
 				<h3>Retrieve meeting schedule by code:</h3>
 				<form name="retrieveForm" method="POST">
-					<input type="text" id="secretcode" name="secretcode">
-					<input type="button" onclick="alert(123)" value="Confirm">
+					<input type="text" name="secretCode">
+					<input type="button" name="testbutton" onclick="handleRetrieve()" value="Confirm">
 				</form>
 			</div>
 			<div id="create-schedule">
@@ -44,28 +34,35 @@
 						<option value="30">30 minutes</option>
 						<option value="60">60 minutes</option>
 					</select>
-					<input type="button" value="Create"  onClick="handleCreate(this)">
+					<input type="button" onclick="handleCreate()" value="Create">
 				</form>
 			</div>
-			
+			<input type="button" class="primary" onclick="handleDelete()" value="Delete Schedule">
 		</nav>
 	</div>
 	<div id="main" class="left">	
 		<h1>Scheduler - Organizer's Page</h1>
-		<h3 id="schedule-info">Schedule name: CS3733 | Author: Prof. Heineman </h3>
+		<h3 id="schedule-info">Schedule name: CS3733 | Author: Electra </h3>
 		<p id="schedule-code">Secret code: [Secret code] | Release code: [Release code] </p>
 		<div style="text-align: right;">
+			<form name="extendForm">
+				from:
+				<input type="date" name="startDate">
+				to:
+				<input type="date" name="endDate">
+				<a class="button small" onclick="handleExtend()">extend schedule</a>
+			</form>
 			<a class="button small" onclick="prev()">previous week</a>
 			<a class="button small" onclick="next()">next week</a>
 			week:<input id="week-input" type="number" style="width: 50px; text-align: center" min="1">
 			<a class="button small" onclick="jump()">jump</a>
 		</div>
-			<table id="schedule" border="1" cellpadding="5"> 
-				<tr>
-					<th><h2>Welcome! </h2></th>
-					<td><p>Please create a new schedule or retrieve a schedule on the right side </p></td>
-				</tr>
-			</table>
-		</div>
-	</body>
+		<table id="schedule" border="1" cellpadding="5"> 
+			<tr>
+				<th><h2>Welcome! </h2></th>
+				<td><p>Please create a new schedule or retrieve a schedule on the left side! </p></td>
+			</tr>
+		</table>
+	</div>
+</body>
 </html>

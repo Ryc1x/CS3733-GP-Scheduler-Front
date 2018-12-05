@@ -6,14 +6,14 @@
 <head>
 	<title>Scheduler - Participant's Page</title>
 </head>
-<body class="is-menu-visible"> 
+<body class="is-menu-visible" onload="handleRefresh(1)"> 
 	<div>
-		<nav id="menu">
-			<p>	
-				<h3>Retrieve meeting schedule by code:</h3>
-				<input style="width: 300px; color: black; background-color: white"type="text" id="secretcode" name="secretcode">
-				<input type="submit" style="width: 200px; margin: 40px" value="Confirm">
-			</p>
+		<nav id="menu">	
+			<h3>Retrieve meeting schedule by code:</h3>
+			<form name="retrieveForm" method="POST">
+				<input type="text" name="releaseCode">
+				<input type="button" onclick="handleRetrieve()" value="Confirm">
+			</form>
 			<h4>Search timesolots by:</h4>
 			<p>	
 				Years:
@@ -33,7 +33,7 @@
 				Day-of-week:
 				<select id="organizor" name="organizor">
 				</select>
-				Day-of-month:
+				Day-of-mon:
 				<select id="organizor" name="organizor">
 				</select>
 				Time slot:
@@ -43,79 +43,24 @@
 			<input type="submit" style="width: 200px; margin-left: 40px" value="Confirm">
 		</nav>
 	</div> 
-
+	
 	<div id="main" class="left">	
 		<h1>Scheduler - Participant's Page</h1>
-		<h3>Schedule name: [NAME]</h3>
+		<h3 id="schedule-info">Schedule name: CS3733 | Author: Electra </h3>
+		<p id="schedule-code">Secret code: [Secret code] | Release code: [Release code] </p>
 		<div style="text-align: right;">
-			<a class="button small" href="#">previous week</a>
-			<a class="button small" href="#">next week</a>
-			week:<input type="number" style="width: 50px; text-align: center" min="1">
-			<a class="button small" href="#">jump</a>
+			<a class="button small" onclick="prev()">previous week</a>
+			<a class="button small" onclick="next()">next week</a>
+			week:<input id="week-input" type="number" style="width: 50px; text-align: center" min="1">
+			<a class="button small" onclick="jump()">jump</a>
 		</div>
-		<table border="1" cellpadding="5" style="margin: 50px; width: 1400px;"> 
-			<caption> Scheduler </caption>
-			<thead>
-				<th>Time</th>
-				<th>Mon<br/>19-Nov</th>
-				<th>Tue<br/>20-Nov</th>
-				<th>Wed<br/>21-Nov</th>
-				<th>Thu<br/>22-Nov</th>
-				<th>Fri<br/>23-Nov</th>
-			</thead>
-			
-			<tbody>
-				<tr>
-					<th>9:00-9:15</th>
-					<td>N/A</td>
-					<td><input type="submit" value="Free"></td>
-					<td>Rui Huang<br/><a href="" onclick="handleCancel()">cancel</a></td>
-					<td>Zhanhong Huang<br/><a href="" onclick="handleCancel()">cancel</a></td>
-					<td><input type="submit" value="Free"></td>
-				</tr>
-				<tr>
-					<th>9:15-9:30</th>
-					<td>N/A</td>
-					<td><input type="submit" value="Free"></td>
-					<td><input type="submit" value="Free"></td>
-					<td>Ziqian Zeng<br/><a href="" onclick="handleCancel()">cancel</a></td>
-					<td><input type="submit" value="Free"></td>
-				</tr>
-				<tr>
-					<th>9:30-9:45</th>
-					<td>N/A</td>
-					<td><input type="submit" value="Free"></td>
-					<td><input type="submit" value="Free"></td>
-					<td><input type="submit" value="Free"></td>
-					<td><input type="submit" value="Free"></td>
-				</tr>
-				<tr>
-					<th>9:45-10:00</th>
-					<td>N/A</td>
-					<td><input type="submit" value="Free"></td>
-					<td>Zonglin Peng<br/><a href="" onclick="handleCancel()">cancel</a></td>
-					<td><input type="submit" value="Free"></td>
-					<td><input type="submit" value="Free"></td>
-				</tr>
-				<tr>
-					<th>10:00-10:15</th>
-					<td>N/A</td>
-					<td><input type="submit" value="Free"></td>
-					<td><input type="submit" value="Free"></td>
-					<td><input type="submit" value="Free"></td>
-					<td><input type="submit" value="Free"></td>
-				</tr>
-				<tr>
-					<th>10:15-10:30</th>
-					<td>N/A</td>
-					<td><input type="submit" value="Free"></td>
-					<td><input type="submit" value="Free"></td>
-					<td><input type="submit" value="Free"></td>
-					<td><input type="submit" value="Free"></td>
-				</tr>
-			</table>
-		</div>
-		<div class="middle">
+		<table id="schedule" border="1" cellpadding="5"> 
+			<tr>
+				<th><h2>Welcome! </h2></th>
+				<td><p>Please retrieve schedule by submit secret code on the left side! </p></td>
+			</tr>
+		</table>
+		<div>
 			<h2>Searching Result:</h2>
 			<ul>
 				<li>
@@ -132,5 +77,6 @@
 				</li>
 			</ul>
 		</div>
-	</body>
-	</html>
+	</div>
+</body>
+</html>
