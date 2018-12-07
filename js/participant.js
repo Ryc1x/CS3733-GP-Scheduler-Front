@@ -25,6 +25,10 @@ function handleRefresh(week) {
     data.id = window.sessionStorage.getItem("id");
     data.week = week;
     
+    if (week <= 0){
+        alert("Aleardy the first week");
+        return;
+    }    
     if (data.id == undefined || data.id == "undefined"){
         return;
     }
