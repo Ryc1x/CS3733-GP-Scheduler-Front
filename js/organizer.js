@@ -13,12 +13,15 @@ const deleteScheduleURL = AWS_URL + "deleteschedule";
 const viewScheduleURL = AWS_URL + "showWeekSchedule";
 const retrieveScheduleURL = AWS_URL + "retrieveschedule";
 const deleteMeetingURL = AWS_URL + "deletemeeting";
+const timeslotURL = AWS_URL + "timeslot";
+const timeslotDayURL = AWS_URL + "timeslotbyday";
+const timeslotTimeURL = AWS_URL + "timeslotbytime";
 // HTML Elements
-const CLOSE_OPEN_DAY = "<a href=\"#\">close all</a><br/> <a href=\"#\">open all</a>";
-const CLOSE_OPEN_SLOT = "<br /><a href=\"#\">close all</a> <a href=\"#\">open all</a>"
-const CLOSED_SLOT = "N/A<br/><a href=\"#\">open</a>";
-const OPEN_SLOT = "<input type=\"button\" value=\"Free\" id=\"[slot id]\" onclick=\"handleClose(this)\">";
-const OCCUPIED_SLOT = "<br/><a href=\"#\" id=\"[meeting id]\" onclick=\"handleCancelMeeting(this)\">cancel</a>";
+const CLOSE_OPEN_DAY = "<a onclick=\"handleCloseDay(this)\" style=\"cursor: pointer;\">close all</a><br/> <a onclick=\"handleOpenDay(this)\" style=\"cursor: pointer;\">open all</a>";
+const CLOSE_OPEN_SLOT = "<br /><a onclick=\"handleCloseTime(this)\" style=\"cursor: pointer;\">close all</a> <a onclick=\"handleOpenTime(this)\" style=\"cursor: pointer;\">open all</a>";
+const CLOSED_SLOT = "N/A<br/><a onclick=\"handleOpen(this)\" style=\"cursor: pointer;\">open</a>";
+const OPENED_SLOT = "<input type=\"button\" value=\"Free\" id=\"[slot id]\" onclick=\"handleClose(this)\">";
+const OCCUPIED_SLOT = "<br/><a id=\"[meeting id]\" onclick=\"handleCancelMeeting(this)\" style=\"cursor: pointer;\">cancel</a>";
 const WELCOME = `
 <tr>
 <th><h2>Welcome! </h2></th>
@@ -232,6 +235,9 @@ function processRetrieveResponse (response) {
 
 // cancel meeting
 function handleCancelMeeting(e) {
+    if (!confirm("Are you sure to cancel this meeting?")){
+        return;
+    }
     let data = {};
     data.id = e.id;
     let jsonData = JSON.stringify(data);
@@ -305,23 +311,20 @@ function processDeleteResponse(response) {
     document.getElementById("schedule").innerHTML = WELCOME;
 }
 
-// open single timeslot TODO!
+// open single timeslot
 function handleOpen(e) {
     let cell = e.parentElement;
     let schedule = document.getElementById("schedule");
     let head = schedule.children[1].children[0].children[cell.cellIndex];
     let data = {};
     data.dayId = head.id;
-    data.startTime = cell.parentElement.firstElementChild.innerText.split("-")[0];
-    data.id = window.sessionStorage.id;
-    if (data.id == undefined || data.id == "undefined"){
-        return;
-    }
+    data.beginTime = cell.parentElement.firstElementChild.innerText.split("-")[0];
+
     let jsonData = JSON.stringify(data);
     console.log(data);
 
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", scheduleURL, true);
+    xhr.open("POST", timeslotURL, true);
     xhr.send(jsonData);
 
     xhr.onloadend = function () {
@@ -329,21 +332,199 @@ function handleOpen(e) {
         console.log(xhr.request);
         if (xhr.readyState == XMLHttpRequest.DONE) {
             console.log ("Response:" + xhr.responseText);
-            processDeleteResponse(xhr.responseText);
+            processOpenResponse(xhr.responseText);
         } 
     };
 }
 
 function processOpenResponse(response) {
     let data = JSON.parse(response);
-    if (data.httpCode != 200){
-        alert("Failed to delete the schedule, please refresh the page.");
+    if (data.httpcode != 200){
+        alert("Failed to open the timeslot, please refresh the page.");
         return;
     }
-    alert("Succesfully cancelled the meeting!");
+    alert("Succesfully opened the timeslot!");
 
-    window.sessionStorage.id = undefined;
-    document.getElementById("schedule").innerHTML = WELCOME;
+    handleRefresh(window.sessionStorage.week)
+}
+
+// close single timeslot 
+function handleClose(e) {
+    let data = {};
+    data.id = e.id;
+
+    let jsonData = JSON.stringify(data);
+    console.log(data);
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("DELETE", timeslotURL, true);
+    xhr.send(jsonData);
+
+    xhr.onloadend = function () {
+        console.log(xhr);
+        console.log(xhr.request);
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            console.log ("Response:" + xhr.responseText);
+            processCloseResponse(xhr.responseText);
+        } 
+    };
+}
+
+function processCloseResponse(response) {
+    let data = JSON.parse(response);
+    if (data.httpcode != 200){
+        alert("Failed to close the timeslot, please refresh the page.");
+        return;
+    }
+    alert("Succesfully closed the timeslot!");
+
+    handleRefresh(window.sessionStorage.week)
+}
+
+
+// open all timeslots on a day
+function handleOpenDay(e) {
+    let head = e.parentElement;
+    let data = {};
+    data.scheduleId = window.sessionStorage.id;
+    data.dayId = head.id;
+
+    let jsonData = JSON.stringify(data);
+    console.log(data);
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", timeslotDayURL, true);
+    xhr.send(jsonData);
+
+    xhr.onloadend = function () {
+        console.log(xhr);
+        console.log(xhr.request);
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            console.log ("Response:" + xhr.responseText);
+            processOpenDayResponse(xhr.responseText);
+        } 
+    };
+}
+
+function processOpenDayResponse(response) {
+    let data = JSON.parse(response);
+    if (data.httpcode != 200){
+        alert("Failed to open timeslots, please refresh the page.");
+        return;
+    }
+    alert("Succesfully opened timeslots!");
+
+    handleRefresh(window.sessionStorage.week)
+}
+
+// close all timeslots on a day 
+function handleCloseDay(e) {
+    if (!confirm("Are you sure to close all timeslots on this day? (This action will also remove schedulled meetings)")){
+        return;
+    }
+    let head = e.parentElement;
+    let data = {};
+    data.dayId = head.id;
+
+    let jsonData = JSON.stringify(data);
+    console.log(data);
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("DELETE", timeslotDayURL, true);
+    xhr.send(jsonData);
+
+    xhr.onloadend = function () {
+        console.log(xhr);
+        console.log(xhr.request);
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            console.log ("Response:" + xhr.responseText);
+            processCloseDayResponse(xhr.responseText);
+        } 
+    };
+}
+
+function processCloseDayResponse(response) {
+    let data = JSON.parse(response);
+    if (data.httpcode != 200){
+        alert("Failed to close timeslots, please refresh the page.");
+        return;
+    }
+    alert("Succesfully closed timeslots!");
+
+    handleRefresh(window.sessionStorage.week)
+}
+
+// open all timeslots on a time period
+function handleOpenTime(e) {
+    let head = e.parentElement;
+    let data = {};
+    data.beginTime = head.innerText.split("-")[0];
+    data.scheduleId = window.sessionStorage.id;
+
+    let jsonData = JSON.stringify(data);
+    console.log(data);
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", timeslotTimeURL, true);
+    xhr.send(jsonData);
+
+    xhr.onloadend = function () {
+        console.log(xhr);
+        console.log(xhr.request);
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            console.log ("Response:" + xhr.responseText);
+            processOpenTimeResponse(xhr.responseText);
+        } 
+    };
+}
+
+function processOpenTimeResponse(response) {
+    let data = JSON.parse(response);
+    if (data.httpcode != 200){
+        alert("Failed to open timeslots, please refresh the page.");
+        return;
+    }
+    alert("Succesfully opened timeslots!");
+
+    handleRefresh(window.sessionStorage.week)
+}
+
+// close all timeslots on a time period 
+function handleCloseTime(e) {
+    if (!confirm("Are you sure to close all timeslots on this time period? (This action will also remove schedulled meetings)")){
+        return;
+    }
+    let head = e.parentElement;
+    let data = {};
+    data.beginTime = head.innerText.split("-")[0];
+    data.scheduleId = window.sessionStorage.id;
+
+    let jsonData = JSON.stringify(data);
+    console.log(data);
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("DELETE", timeslotTimeURL, true);
+    xhr.send(jsonData);
+
+    xhr.onloadend = function () {
+        console.log(xhr);
+        console.log(xhr.request);
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            console.log ("Response:" + xhr.responseText);
+            processCloseTimeResponse(xhr.responseText);
+        } 
+    };
+}
+
+function processCloseTimeResponse(response) {
+    let data = JSON.parse(response);
+    if (data.httpcode != 200){
+        alert("Failed to close timeslots, please refresh the page.");
+        return;
+    }
+    alert("Succesfully closed timeslots!");
+
+    handleRefresh(window.sessionStorage.week)
 }
 
 // previous, next, and jump
@@ -365,10 +546,10 @@ function slotElement (slot) {
         return CLOSED_SLOT;
     }
     else if (slot.meeting == undefined) {
-        return OPEN_SLOT.replace("[slot id]", slot.id);
+        return OPENED_SLOT.replace("[slot id]", slot.id);
     }
     else{
-        return slot.meeting.partInfo + OCCUPIED_SLOT.replace("[meeting id]", slot.meeting.id);
+        return "<b>" + slot.meeting.partInfo + "</b>" + OCCUPIED_SLOT.replace("[meeting id]", slot.meeting.id);
     }
 }
 

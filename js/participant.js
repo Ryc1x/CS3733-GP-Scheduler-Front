@@ -13,8 +13,8 @@ const findScheduleURL = AWS_URL + "findschedule";
 const meetingURL = AWS_URL + "meeting";
 // HTML Elements
 const CLOSED_SLOT = "N/A";
-const OPEN_SLOT = "<input type=\"button\" value=\"Free\" id=\"[slot id]\" onclick=\"handleCreateMeeting(this)\">";
-const OCCUPIED_SLOT = "<br/><a href=\"#\" id=\"[meeting id]\" onclick=\"handleCancelMeeting(this)\">cancel</a>";
+const OPENED_SLOT = "<input type=\"button\" value=\"Free\" id=\"[slot id]\" onclick=\"handleCreateMeeting(this)\">";
+const OCCUPIED_SLOT = "<br/><a id=\"[meeting id]\" onclick=\"handleCancelMeeting(this)\" style=\"cursor: pointer;\">cancel</a>";
 
 // todo delete test vars
 let x;
@@ -160,7 +160,7 @@ function processRetrieveResponse(response) {
 function handleCreateMeeting(e) {
     let slotId = e.id;
     let partInfo = prompt("Please enter your information (e.g. name) to schedule a meeting");
-    if (partInfo == ""){
+    if (partInfo == "" || partInfo == null){
         alert("Please enter your information to continute");
         return;
     }
@@ -192,10 +192,11 @@ function processCreateMeetingResponse(response) {
     let data = JSON.parse(response);
     let scode = data.secretCode;
     if (scode == undefined){
-        alert("Fail to create meeting because the timeslot is no longer avaliable. \nPlease refresh your page");
-        return;
+        alert("Failed to create meeting because the timeslot is no longer avaliable.");
     }
-    prompt("Succesfully created meeting! \nPlease save the following secret code for cancelling the meeting:", scode);
+    else {
+        prompt("Succesfully created meeting! \nPlease save the following secret code for cancelling the meeting:", scode);
+    }
     handleRefresh(window.sessionStorage.week);
 }
 
@@ -234,10 +235,11 @@ function handleCancelMeeting(e) {
 function processCancelMeetingResponse(response) {
     let data = JSON.parse(response);
     if (data.httpcode != 200){
-        alert("Failed to cancel the meeting, please make sure the secret code is valid.");
-        return;
+        alert("Failed to cancel the meeting, please make sure the secret code is valid. \n Or meeting has already been cancelled.");
     }
-    alert("Succesfully cancelled the meeting!");
+    else {
+        alert("Succesfully cancelled the meeting!");
+    }
 
     handleRefresh(window.sessionStorage.week);
 }
@@ -261,10 +263,10 @@ function slotElement (slot) {
         return CLOSED_SLOT;
     }
     else if (slot.meeting == undefined) {
-        return OPEN_SLOT.replace("[slot id]", slot.id);
+        return OPENED_SLOT.replace("[slot id]", slot.id);
     }
     else{
-        return slot.meeting.partInfo + OCCUPIED_SLOT.replace("[meeting id]", slot.meeting.id);
+        return "<b>" + slot.meeting.partInfo + "</b>" + OCCUPIED_SLOT.replace("[meeting id]", slot.meeting.id);
     }
 }
 
