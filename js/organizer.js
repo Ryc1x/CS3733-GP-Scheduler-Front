@@ -161,11 +161,11 @@ function processRefreshResponse(response,week){
     
     // add table head
     let headtime = "<th>Timeslots\\days</th>"
-    let mon = "<th id=\"" + days[0].id + "\">Mon<br/>" + days[0].date + "<br/> " + CLOSE_OPEN_DAY + "</th>";
-    let tue = "<th id=\"" + days[1].id + "\">Tue<br/>" + days[1].date + "<br/> " + CLOSE_OPEN_DAY + "</th>";
-    let wed = "<th id=\"" + days[2].id + "\">Wed<br/>" + days[2].date + "<br/> " + CLOSE_OPEN_DAY + "</th>";
-    let thu = "<th id=\"" + days[3].id + "\">Thu<br/>" + days[3].date + "<br/> " + CLOSE_OPEN_DAY + "</th>";
-    let fri = "<th id=\"" + days[4].id + "\">Fri<br/>" + days[4].date + "<br/> " + CLOSE_OPEN_DAY + "</th>";
+    let mon = "<th id=\"" + days[0].id + "\">Mon<br/>" + days[0].date + "<br/> " + (days[0].timeslots == undefined ? "" : CLOSE_OPEN_DAY) + "</th>";
+    let tue = "<th id=\"" + days[1].id + "\">Tue<br/>" + days[1].date + "<br/> " + (days[1].timeslots == undefined ? "" : CLOSE_OPEN_DAY) + "</th>";
+    let wed = "<th id=\"" + days[2].id + "\">Wed<br/>" + days[2].date + "<br/> " + (days[2].timeslots == undefined ? "" : CLOSE_OPEN_DAY) + "</th>";
+    let thu = "<th id=\"" + days[3].id + "\">Thu<br/>" + days[3].date + "<br/> " + (days[3].timeslots == undefined ? "" : CLOSE_OPEN_DAY) + "</th>";
+    let fri = "<th id=\"" + days[4].id + "\">Fri<br/>" + days[4].date + "<br/> " + (days[4].timeslots == undefined ? "" : CLOSE_OPEN_DAY) + "</th>";
     thead.innerHTML = headtime + mon + tue + wed + thu + fri;
     table.appendChild(thead);
     
