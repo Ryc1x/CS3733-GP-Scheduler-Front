@@ -11,10 +11,14 @@ nav#menu select {
 nav#menu input{
     color: black;
     background-color: white;
-    width: 250px;
+    width: 260px;
 }
 
-nav#menu form input[type="button"]{
+nav#menu input[type="text"]{
+    height: 40px;
+}
+
+nav#menu input[type="button"]{
     margin-top: 20px;
 }
 

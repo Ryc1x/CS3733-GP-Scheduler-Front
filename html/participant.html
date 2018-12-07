@@ -11,35 +11,22 @@
 		<nav id="menu">	
 			<h3>Retrieve meeting schedule by code:</h3>
 			<form name="retrieveForm" method="POST">
-				<input type="text" name="releaseCode">
+				<input type="text" name="releaseCode" placeholder="[Release Code]" />
 				<input type="button" onclick="handleRetrieve()" value="Confirm">
 			</form>
-			<h4>Search timesolots by:</h4>
-			<p>	
-				Years:
-				<select class="small" id="organizor" name="organizor">
-					<option>from</option>
-				</select>
-				<select class="small" id="organizor" name="organizor">
-					<option>to</option>
-				</select>
-				Months:
-				<select class="small" id="organizor" name="organizor">
-					<option>from</option>
-				</select>
-				<select class="small" id="organizor" name="organizor">
-					<option>to</option>
-				</select>
-				Day-of-week:
-				<select id="organizor" name="organizor">
-				</select>
-				Day-of-mon:
-				<select id="organizor" name="organizor">
-				</select>
-				Time slot:
-				<select id="organizor" name="organizor">
-				</select>
-			</p>
+			<h3>Filter available timesolots by:</h3>
+			<form name="filterForm" method="POST">	
+				Year:
+				<input type="text" name="year" placeholder="YYYY" />
+				Month: (1~12)
+				<input type="text" name="month" placeholder="Month" />
+				Day-of-month (1~31):
+				<input type="text" name="day-of-month" placeholder="Day of month" />
+				Day-of-week (1~5):
+				<input type="text" name="day-of-week" placeholder="Day of week" />
+				From time:<input type="time" name="period" placeholder="HH:MM" />
+				To time:<input type="time" name="period" placeholder="HH:MM" />
+			</form>
 			<input type="submit" style="width: 200px; margin-left: 40px" value="Confirm">
 		</nav>
 	</div> 

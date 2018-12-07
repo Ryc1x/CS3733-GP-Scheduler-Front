@@ -13,14 +13,20 @@
 		<nav id="menu">
 			<p>	
 				<h3>Authenticate by code:</h3>
-				<input style="width: 300px; color: black; background-color: white" type="text" value="[Secret code here]">
-				<input type="submit" style="width: 200px; margin: 50px; margin-top: 20px;" value="Confirm">
-				<h5>Delete schedules created before:</h5>
-				<input style="width: 300px; color: black; background-color: white" type="text" value="Days">
-				<input type="submit" style="width: 200px; margin: 50px; margin-top: 20px;" value="Confirm">
-                <h5>Retrieve schedules created within:</h5>  
-				<input style="width: 300px; color: black; background-color: white" type="text" value="Hours">
-				<input type="submit" style="width: 200px; margin: 50px; margin-top: 20px;" value="Confirm">
+				<form name="authenticate" type="POST"> 
+					<input type="text" placeholder="[Secret Code]" />
+					<input type="button" value="Confirm">
+				</form>
+				<h4>Delete schedules created before:</h4>
+				<form name="authenticate" type="POST"> 
+					<input type="text" placeholder="Days" />
+					<input type="button" value="Confirm">
+				</form>
+                <h4>Retrieve schedules created within:</h4> 
+				<form name="authenticate" type="POST"> 
+					<input type="text" placeholder="Hours" />
+					<input type="button" value="Confirm">
+				</form>
 			</p>
 		</nav>
 	</div>

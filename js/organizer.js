@@ -45,7 +45,6 @@ function handleCreate(){
     data.endTime = form.endTime.value;
     data.timePeriod = form.duration.value;
     let jsonData = JSON.stringify(data);
-    console.log(data);
     
     // check input
     if (data.name == "" || data.author == "" || data.startDate == "" || data.endDate == "" || data.startTime == "" || data.endTime ==""){
@@ -101,7 +100,11 @@ function handleRefresh(week) {
     let data = {};
     data.id = window.sessionStorage.getItem("id");
     data.week = week;
-    
+
+    if (week <= 0){
+        alert("Aleardy the first week");
+        return;
+    }    
     if (data.id == undefined || data.id == "undefined"){
         return;
     }
@@ -419,9 +422,6 @@ function processOpenDayResponse(response) {
 
 // close all timeslots on a day 
 function handleCloseDay(e) {
-    if (!confirm("Are you sure to close all timeslots on this day? (This action will also remove schedulled meetings)")){
-        return;
-    }
     let head = e.parentElement;
     let data = {};
     data.dayId = head.id;
@@ -491,9 +491,6 @@ function processOpenTimeResponse(response) {
 
 // close all timeslots on a time period 
 function handleCloseTime(e) {
-    if (!confirm("Are you sure to close all timeslots on this time period? (This action will also remove schedulled meetings)")){
-        return;
-    }
     let head = e.parentElement;
     let data = {};
     data.beginTime = head.innerText.split("-")[0];

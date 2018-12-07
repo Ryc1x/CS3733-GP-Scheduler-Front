@@ -14,21 +14,21 @@
 			<div>	
 				<h3>Retrieve meeting schedule by code:</h3>
 				<form name="retrieveForm" method="POST">
-					<input type="text" name="secretCode">
-					<input type="button" name="testbutton" onclick="handleRetrieve()" value="Confirm">
+					<input type="text" name="secretCode" placeholder="[Secret Code]" />
+					<input type="button" name="testbutton" onclick="handleRetrieve()" value="Confirm" />
 				</form>
 			</div>
 			<div id="create-schedule">
 				<h3>Or, create one </h3>
 				<form name="createForm" method="POST">
-					schedule name:<input name="name" value="Schedule name" />
-					author:<input name="author" value="Author" />
+					schedule name:<input type="text" name="name" placeholder="Schedule Name" />
+					author:<input type="text" name="author" placeholder="Author" />
 					start date:<input name="startDate" type="date"/>
 					end date:<input name="endDate" type="date"/>
 					daily start time:<input name="startTime" type="time"/>
 					daily end time:<input name="endTime" type="time"/>
 					timeslot period:
-					<select name="duration" style="width: 250px;">
+					<select name="duration">
 						<option value="15">15 minutes</option>
 						<option value="20">20 minutes</option>
 						<option value="30">30 minutes</option>
