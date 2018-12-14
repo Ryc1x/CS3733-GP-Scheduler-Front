@@ -11,10 +11,12 @@ const AWS_URL = "https://vie39y0l01.execute-api.us-east-2.amazonaws.com/Version2
 const viewScheduleURL = AWS_URL + "showWeekSchedule";
 const findScheduleURL = AWS_URL + "findschedule";
 const meetingURL = AWS_URL + "meeting";
+const filterURL = AWS_URL + "searchopentimeslot";
 // HTML Elements
 const CLOSED_SLOT = "N/A";
 const OPENED_SLOT = "<input type=\"button\" value=\"Free\" id=\"[slot id]\" onclick=\"handleCreateMeeting(this)\">";
 const OCCUPIED_SLOT = "<br/><a id=\"[meeting id]\" onclick=\"handleCancelMeeting(this)\" style=\"cursor: pointer;\">cancel</a>";
+const SEARCH_ITEM = `<li>[date] | [begin]-[end] <a style="cursor: pointer;" id=[slot id] onclick="handleCreateMeeting(this)">Register</a></li>`
 
 // todo delete test vars
 let x;
@@ -246,6 +248,79 @@ function processCancelMeetingResponse(response) {
     }
 
     handleRefresh(window.sessionStorage.week);
+}
+
+function handleFilter(){
+    if (window.sessionStorage.id == undefined || window.sessionStorage.id == "undefined"){
+        return;
+    }
+    let data = {};
+    let form = document.filterForm;
+    data.scheduleId = window.sessionStorage.id;
+    data.year = form.year.value == "" ? 0 : form.year.value;
+    data.month = form.month.value == "" ? 0 : form.month.value;
+    data.dayOfMonth = form.dayOfMonth.value == "" ? 0 : form.dayOfMonth.value;
+    data.dayOfWeek = form.dayOfWeek.value == "" ? 0 : form.dayOfWeek.value;
+    data.beginTime = form.begin.value == "" ? null : form.begin.value;
+    data.endTime = form.end.value == "" ? null : form.end.value;
+
+    if (isNaN(data.year) || isNaN(data.month) || isNaN(data.dayOfMonth)){
+        alert("Please enter number for year/month/day-of-month. ")
+    }
+    if (data.month < 0 || data.month > 12){
+        alert("Please enter valid month or leave it blank");
+        return;
+    }
+    if (data.dayOfMonth < 0 || data.dayOfMonth > 31){
+        alert("Please enter valid day of month or leave it blank");
+        return;
+    }
+    if (data.beginTime != null && data.endTime != null){
+        if (toMinute(data.beginTime) >= toMinute(data.endTime)){
+            alert("The end time must be later than begin time, or leave both blank");
+            return;
+        }
+    }
+
+    let jsonData = JSON.stringify(data);
+    console.log(data);
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", filterURL, true);
+    xhr.send(jsonData);
+    
+    xhr.onloadend = function () {
+        console.log(xhr);
+        console.log(xhr.request);
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            console.log ("Response:" + xhr.responseText);
+            processFilterResponse(xhr.responseText);
+        } 
+    };
+}
+
+function processFilterResponse(response) {
+    let data = JSON.parse(response);
+    let result = document.getElementById("search-result");
+    if (data.httpcode != 200){
+        alert("No timeslot available under given filters, please try different filters.");
+        result.innerHTML = "";
+        return;
+    }
+    let slots = data.availableSlotsItems;
+    let title = `<h2>Searching Result:</h2>`;
+    let close = `<input type="button" class="small" style="margin-left: 20px" onclick="handleCloseFilter()" value="Clear Filter Result">`
+    let ul = "";
+    for (let i = 0; i < slots.length; i++){
+        ul += SEARCH_ITEM.replace("[date]",slots[i].date).replace("[begin]",slots[i].beginTime).replace("[end]",slots[i].endTime).replace("[slot id]",slots[i].timeslotId);
+    }
+    ul = "<ul>" + ul + "</ul>";
+    result.innerHTML = title + close + ul;
+}
+
+function handleCloseFilter() {
+    let result = document.getElementById("search-result");
+    result.innerHTML = "";
 }
 
 // previous, next, and jump

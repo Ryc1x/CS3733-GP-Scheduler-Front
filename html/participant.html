@@ -21,13 +21,20 @@
 				Month: (1~12)
 				<input type="text" name="month" placeholder="Month" />
 				Day-of-month (1~31):
-				<input type="text" name="day-of-month" placeholder="Day of month" />
-				Day-of-week (1~5):
-				<input type="text" name="day-of-week" placeholder="Day of week" />
-				From time:<input type="time" name="period" placeholder="HH:MM" />
-				To time:<input type="time" name="period" placeholder="HH:MM" />
+				<input type="text" name="dayOfMonth" placeholder="Day of month" />
+				Day-of-week:
+				<select name="dayOfWeek">
+						<option value="">Not selected</option>
+						<option value="1">Monday</option>
+						<option value="2">Tuesday</option>
+						<option value="3">Wednesday</option>
+						<option value="4">Thursday</option>
+						<option value="5">Friday</option>
+				</select>
+				Begin time:<input type="time" name="begin" placeholder="HH:MM" />
+				End time:<input type="time" name="end" placeholder="HH:MM" />
+				<input type="button" onclick="handleFilter()" value="Search">
 			</form>
-			<input type="submit" style="width: 200px; margin-left: 40px" value="Confirm">
 		</nav>
 	</div> 
 	
@@ -41,29 +48,14 @@
 			week:<input id="week-input" type="number" style="width: 50px; text-align: center" min="1">
 			<a class="button small" onclick="jump()">jump</a>
 		</div>
-		<table id="schedule" border="1" cellpadding="5"> 
+		<div id="search-result">
+		</div>
+		<table id="schedule"> 
 			<tr>
 				<th><h2>Welcome! </h2></th>
 				<td><p>Please retrieve schedule by submit secret code on the left side! </p></td>
 			</tr>
 		</table>
-		<div>
-			<h2>Searching Result:</h2>
-			<ul>
-				<li>
-					Nov. 26 | 10:15-10:30
-					<a href="">register</a>
-				</li>
-				<li>
-					Nov. 27 | 10:15-10:30
-					<a href="">register</a>
-				</li>
-				<li>
-					Nov. 28 | 10:15-10:30
-					<a href="">register</a>
-				</li>
-			</ul>
-		</div>
 	</div>
 </body>
 </html>

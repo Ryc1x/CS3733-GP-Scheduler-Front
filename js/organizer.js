@@ -16,6 +16,7 @@ const deleteMeetingURL = AWS_URL + "deletemeeting";
 const timeslotURL = AWS_URL + "timeslot";
 const timeslotDayURL = AWS_URL + "timeslotbyday";
 const timeslotTimeURL = AWS_URL + "timeslotbytime";
+const extendURL = AWS_URL + "updatedate";
 // HTML Elements
 const CLOSE_OPEN_DAY = "<a onclick=\"handleCloseDay(this)\" style=\"cursor: pointer;\">close all</a><br/> <a onclick=\"handleOpenDay(this)\" style=\"cursor: pointer;\">open all</a>";
 const CLOSE_OPEN_SLOT = "<br /><a onclick=\"handleCloseTime(this)\" style=\"cursor: pointer;\">close all</a> <a onclick=\"handleOpenTime(this)\" style=\"cursor: pointer;\">open all</a>";
@@ -90,7 +91,7 @@ function processCreateResponse(response){
     window.sessionStorage.setItem("id",id);
     window.sessionStorage.setItem("week",1);
     
-    alert("Successfully created the schedule. \nSecret code: " + secretCode + "\nRelease code: " + releaseCode);
+    alert("Successfully created the schedule. \nSecret code: " + secretCode + "\nRelease code: " + releaseCode + "\nThe code will also be shown on the page.");
     
     handleRefresh(1);
 }
@@ -151,6 +152,10 @@ function processRefreshResponse(response,week){
     let thead = document.createElement("thead");
     let tbody = document.createElement("tbody");
     
+    // show start/end date
+    document.extendForm.startDate.value = schedule.startDate;
+    document.extendForm.endDate.value = schedule.endDate;
+
     // clear table
     table.innerHTML = "";
     
@@ -520,6 +525,44 @@ function processCloseTimeResponse(response) {
         return;
     }
     alert("Succesfully closed timeslots!");
+
+    handleRefresh(window.sessionStorage.week)
+}
+
+function handleExtend(){
+    if (window.sessionStorage.id == "undefined" || window.sessionStorage.id == undefined){
+        return;
+    }
+    let form = document.extendForm;
+    let data = {}
+    data.scheduleId = window.sessionStorage.id;
+    data.startDate = form.startDate.value;
+    data.endDate = form.endDate.value;
+
+    let jsonData = JSON.stringify(data);
+    console.log(data);
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", extendURL, true);
+    xhr.send(jsonData);
+
+    xhr.onloadend = function () {
+        console.log(xhr);
+        console.log(xhr.request);
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            console.log ("Response:" + xhr.responseText);
+            processExtendResponse(xhr.responseText);
+        } 
+    };
+}
+
+function processExtendResponse(response) {
+    let data = JSON.parse(response);
+    if (data.httpcode != 200){
+        alert("Failed to extend the date, please make sure inputs is not in range of current start/end date.");
+        return;
+    }
+    alert("Succesfully extended date!");
 
     handleRefresh(window.sessionStorage.week)
 }

@@ -3,10 +3,15 @@ div.left {
     margin-right: 50px;
 }
 
+nav#menu h3, nav#menu h4{
+    margin-bottom: 12px;
+}
+
 nav#menu select {
-    height: 40px; 
     color: black; 
     background-color: white;
+    height: 40px; 
+    width: 260px;
 }
 nav#menu input{
     color: black;
@@ -20,10 +25,6 @@ nav#menu input[type="text"]{
 
 nav#menu input[type="button"]{
     margin-top: 20px;
-}
-
-table#schedule {
-    margin: 20px; 
 }
 
 body {

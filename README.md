@@ -1,8 +1,8 @@
 # CS3733-GP-Scheduler-Front
 Front-end web pages of CS3733 group project scheduler application. 
 
-
 ## Features
+Project Completed!
 
 ### Organizer Desired Features
 
@@ -22,9 +22,9 @@ The organizer wants to be able to carry out the following tasks:
 
 - [x] Once a meeting schedule is created, the organizer must tell participants about the scheduled meeting so they can start to register for meetings
 
-- [ ] Extend the ending date of a meeting schedule to a future date
+- [x] Extend the ending date of a meeting schedule to a future date
 
-- [ ] Extend the starting date of a meeting schedule to an earlier date
+- [x] Extend the starting date of a meeting schedule to an earlier date
 
 - [x] Delete a meeting schedule once it no longer is useful. Note that organizers can only delete meeting schedules that they had previously created
 
@@ -38,15 +38,15 @@ Participants want to be able to carry out the following tasks:
 
 - [x] Cancel a previously scheduled meeting; this must be restricted so participants can only cancel a meeting that they had previously created
 
-- [ ] Search for a list of open time slots (filtered by Month, Year, Day-Of-Week, Day-Of-Month, or Timeslot). These individual search filters can be combined to reduce the search results. Within the search results, the participant can simply create a meeting from one of the returned timeslots
+- [x] Search for a list of open time slots (filtered by Month, Year, Day-Of-Week, Day-Of-Month, or Timeslot). These individual search filters can be combined to reduce the search results. Within the search results, the participant can simply create a meeting from one of the returned timeslots
 
 ### System Administrator Feature
 
 The system administrator is responsible for maintaining the system and would like to carry out the following tasks:
 
-- [ ] Retrieve a list of meeting schedules more than N days old and delete them from the system
+- [x] Retrieve a list of meeting schedules more than N days old and delete them from the system
 
-- [ ] Retrieve a list of meeting schedules created in the past N hours
+- [x] Retrieve a list of meeting schedules created in the past N hours
 
 
 ## References

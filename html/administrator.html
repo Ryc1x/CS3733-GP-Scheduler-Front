@@ -2,84 +2,50 @@
 <html>
 <link rel="stylesheet" type="text/css" href="../css/industrious.css">
 <link rel="stylesheet" type="text/css" href="../css/extra.css">
-<style>
-	
-</style>
+<script src="../js/jquery-3.3.1.min.js"></script>
+<script src="../js/administrator.js"></script>
+
 <head>
 	<title>Scheduler - Administrator's Page</title>
 </head>
 <body class="is-menu-visible"> 
 	<div>
 		<nav id="menu">
-			<p>	
-				<h3>Authenticate by code:</h3>
-				<form name="authenticate" type="POST"> 
-					<input type="text" placeholder="[Secret Code]" />
-					<input type="button" value="Confirm">
-				</form>
-				<h4>Delete schedules created before:</h4>
-				<form name="authenticate" type="POST"> 
-					<input type="text" placeholder="Days" />
-					<input type="button" value="Confirm">
-				</form>
-                <h4>Retrieve schedules created within:</h4> 
-				<form name="authenticate" type="POST"> 
-					<input type="text" placeholder="Hours" />
-					<input type="button" value="Confirm">
-				</form>
-			</p>
+			<h3>Authenticate by code:</h3>
+			<form name="authenticateForm" type="POST"> 
+				<input type="text" name="code" placeholder="[Authentication Code]" />
+				<input type="button" value="Authenticate" onclick="handleAuthenticate()">
+			</form>
+			<h4>Retrieve schedules created within:</h4> 
+			<form name="retrieveForm" type="POST"> 
+				<input type="text" name="hours" placeholder="Hours" />
+				<input type="button" value="Confirm" onclick="handleRetrieve()">
+			</form>
+			<h4>Delete schedules created before:</h4>
+			<form name="deleteForm" type="DELETE"> 
+				<input type="text" name="days" placeholder="Days" />
+				<input type="button" class="primary" value="Delete" onclick="handleDelete()">
+			</form>
 		</nav>
 	</div>
 	<div id="main" class="left">
 		<h1>Scheduler - Administrator's Page</h1>
-		<!-- <div style="text-align: right;">
-			<a class="button small" href="#">previous</a>
-			<a class="button small" href="#">next</a>
-			<input type="number">
-			<a class="button small" href="#">jump</a>
-		</div> -->
-		<table border="1" cellpadding="5" style="margin: 50px; width: 1400px;"> 
+		<table id="list"> 
 			<caption> List of Schedules </caption>
 			<thead>
 				<th>Schedule Name</th>
-                <th>Date Created</th>
-                <th>Available Time</th>
-				<th>Total Meetings</th>
-				<th>Future Meetings</th>
+				<th>Author</th>
+				<th>Date Created</th>
+				<th>Available Time</th>
+				<th>Timeslots</th>
+				<th>Meetings</th>
 			</thead>
 			
 			<tbody>
-				<tr>
-					<th>CS3733 office hour</th>
-					<td>2018/11/01</td>
-					<td>2018/11/02-2018/11/30</td>
-					<td>74</td>
-					<td>48</td>
-				</tr>
-				<tr>
-					<th>CS2303 office hour</th>
-					<td>2018/11/01</td>
-					<td>2018/11/02-2018/11/30</td>
-					<td>74</td>
-					<td>48</td>
-				</tr>
-				<tr>
-					<th>CS210X office hour</th>
-					<td>2018/11/01</td>
-					<td>2018/11/02-2018/11/30</td>
-					<td>74</td>
-					<td>48</td>
-				</tr>
-				<tr>
-					<th>CS2223 office hour</th>
-					<td>2018/11/01</td>
-					<td>2018/11/02-2018/11/30</td>
-					<td>74</td>
-					<td>48</td>
-				</tr>
-			</table>
-		</div>
-		<div>
-		</div>
-	</body>
-	</html>
+			</tbody>
+		</table>
+	</div>
+	<div>
+	</div>
+</body>
+</html>

@@ -1,14 +1,5 @@
-pre-signed urls: (expires 12-14)
-
+AWS URLs:
 participant:
-https://cs3733-electra.s3.us-east-2.amazonaws.com/html/participant.html?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20181207T205812Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604797&X-Amz-Credential=AKIAIIY5GYZMXIIZETUA%2F20181207%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Signature=ffce626997b63b219d9e37e491a3131a7cf2d8fee4bd76ade85a1751408ae149
-organizer:
-https://cs3733-electra.s3.us-east-2.amazonaws.com/html/organizer.html?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20181207T205837Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604797&X-Amz-Credential=AKIAIIY5GYZMXIIZETUA%2F20181207%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Signature=9f4d221fca2a676ca23b2c63f8caa6a1c4fd71f6b93ee7e8361834d536e48d3d
-administrator:
-https://cs3733-electra.s3.us-east-2.amazonaws.com/html/administrator.html?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20181207T205746Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604794&X-Amz-Credential=AKIAIIY5GYZMXIIZETUA%2F20181207%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Signature=7ad77e646d9f6336ad360d7cd6d1c0dddb1f950e4c4ac641d783b8bd26395f45
-
-Fixed urls:
-participants:
 https://s3.us-east-2.amazonaws.com/cs3733-electra/html/participant.html
 organizer:
 https://s3.us-east-2.amazonaws.com/cs3733-electra/html/organizer.html
